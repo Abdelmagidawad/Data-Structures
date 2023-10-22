@@ -44,7 +44,7 @@ string InfixToPostfix(string ex) {
 			s.pop();
 		}
 		else {
-			while (!s.empty() && pr(ex[i]) <= pr(s.top())) {
+			while (!s.empty() && priority(ex[i]) <= priority(s.top())) {
 				result += s.top();
 				s.pop();
 			}
