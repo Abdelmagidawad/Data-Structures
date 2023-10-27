@@ -110,8 +110,7 @@ public:
 
 			queue<node*>q;
 			q.push(r);
-
-			while (!q.empty()) {
+ 			while (!q.empty()) {
 				node* cur = q.front();
 				cout << cur->data << " ";
 				if (cur->left != NULL)
@@ -125,10 +124,126 @@ public:
 
 	
 	
+	//*********
+	//search item in BST
+
+	node* search(node* r, t key) {
+
+		if (r == NULL) return NULL;
+		else if (r->data == key)
+			return r;
+		else if (key < r->data)
+			return search(r->left, key);
+		else
+			return search(r->right, key);
+	}
+
+	void search(t key) {
+
+		node* result = search(root, key);
+		if (result == NULL)
+			cout << "Sorry ,Im not found" << endl;
+		else
+			cout << "Yes ,Im found" << endl;
+	}
+
+	//***********
+	//Find Minimum number in BST
+
+	node* findmin(node* r) {
+		
+		if (r == NULL)  return NULL;
+		else if (r->left == NULL)
+			return r;
+		else
+			return findmin(r->left);
+ 	}
+
+	void findmin() {
+		node* res = findmin(root);
+		if (res == NULL)
+			cout << "NO items exist" << endl;
+		else
+			cout << "Min_item = "<<res->data << endl;
+	}
+
+
+	//***********
+	//Find Maxmum number in BST
+
+	node* findmax(node* r) {
+
+		if (r == NULL)  return NULL;
+		else if (r->right == NULL)
+			return r;
+		else
+			return findmax(r->right);
+	}
+
+	void findmax() {
+		node* res = findmax(root);
+		if (res == NULL)
+			cout << "No items exist" << endl;
+		else
+			cout << "Max_item = " << res->data << endl;
+	}
+
+
+	//************
+	//Delete item in BST
+
+	node* Delete(node* r, t key) {
+		
+		if (r == NULL)   return NULL;
+		if (key < r->data)
+			r->left = Delete(r->left, key);
+		else if (key > r->data)
+			r->right = Delete(r->right, key);
+		else {
+			if (r->left == NULL && r->right == NULL)  //leaf node
+				r = NULL;
+			else if (r->left != NULL && r->right == NULL) {    //one chiled on the left node
+				r->data = r->left->data;
+				delete r->left;
+				r->left = NULL;
+			}
+			else if (r->left == NULL && r->right != NULL)   //one chiled on the right node
+			{
+				r->data = r->right->data;
+				delete r->right;
+				r->right = NULL;
+			}
+			else //node have a tow chiled
+			{
+				node* max = findmax(r->left);
+				r->data = max->data;
+				r->left=Delete(r->left, max->data);
+			}
+		}
+		return r;
+	}
+
+	void Delete(t key) {
+		node* res = Delete(root, key);
+		cout << "tree after delete "<<endl;
+		preorder(res);
+	}
+
+
+	//*************
+	//Hight(BST)=> number of the last node in tree
+	int gethight(node* r) {
+		
+		if (r == NULL) return 0;
+		else
+			return 1 + max(gethight(r->left), gethight(r->right));
+	}
+
+};
+
 int main()
 {
 	BST<int> b;
-
 	b.add(20);
 	b.add(30);
 	b.insert(10);
@@ -150,7 +265,17 @@ int main()
 	cout << "Level_order = "; //20 10 30 7 11
 	b.levelorder(b.root);
 	
+	//*********************************
+	int key;  cin >> key;
 
+	b.search(key);
+
+	b.findmin();
+	b.findmax();
+	
+	b.Delete(11);
+	
+	cout <<endl<< "hight= " << b.gethight(b.root)<<endl;
 	
 	return 0;
 }
