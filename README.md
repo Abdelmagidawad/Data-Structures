@@ -62,10 +62,10 @@ This section covers three types of queues: a simple queue using an array, a circ
 
 In this part, you'll find an implementation of a binary tree. We also include examples of binary search trees and AVL trees (height-balanced binary search trees). Functions to include:
 - `Node` struct/class to represent the tree nodes.
-- `BinaryTree` class with functions for insertion, traversal (inorder, preorder, postorder),level order, githight and searching.
+- `BinaryTree` class with functions for `insertion`, `traversal` (inorder, preorder, postorder),level order, `githight` and `searching`.
 
 **Binary Search Tree (BST):**
-- Inherits or uses `BinaryTree` class but enforces the BST property with insert, delete, and search ,fin min find max,functions.
+- Inherits or uses `BinaryTree` class but enforces the BST property with `insert`, `delete`, and `search` ,`fin min` `find max`,functions.
 
 **AVL Tree (Height-Balanced Tree):**
 - Inherits or uses the BST class, but includes balancing functions (rotation) and maintains the AVL property.
